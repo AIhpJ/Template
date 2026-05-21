@@ -1,0 +1,257 @@
+:root {
+  --bg: #08141b;
+  --bg-accent: #123446;
+  --panel: rgba(9, 22, 31, 0.84);
+  --panel-strong: rgba(7, 17, 24, 0.96);
+  --text: #f3efe3;
+  --muted: #b7c9c7;
+  --accent: #f7b32b;
+  --accent-2: #52b788;
+  --danger: #ff6b6b;
+  --grid: rgba(243, 239, 227, 0.08);
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top, rgba(82, 183, 136, 0.18), transparent 30%),
+    linear-gradient(135deg, var(--bg), var(--bg-accent) 55%, #02070a);
+}
+
+button {
+  font: inherit;
+}
+
+.app-shell {
+  width: min(1120px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 32px 0 40px;
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) minmax(320px, 1fr);
+  gap: 28px;
+  align-items: center;
+}
+
+.hero,
+.game-card {
+  background: var(--panel);
+  border: 1px solid rgba(243, 239, 227, 0.08);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.hero {
+  padding: 32px;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.78rem;
+  color: var(--accent);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.4rem, 7vw, 4.6rem);
+  line-height: 0.95;
+}
+
+.intro {
+  margin: 18px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.status-grid article {
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.label {
+  display: block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.status-grid strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 1.6rem;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.controls button,
+.mobile-pad button {
+  border: none;
+  border-radius: 999px;
+  padding: 14px 18px;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.controls button:hover,
+.controls button:focus-visible,
+.mobile-pad button:hover,
+.mobile-pad button:focus-visible {
+  transform: translateY(-1px);
+}
+
+#start-button {
+  background: linear-gradient(135deg, var(--accent), #ffd166);
+  color: #101820;
+  box-shadow: 0 12px 24px rgba(247, 179, 43, 0.28);
+}
+
+#pause-button {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
+
+.tips {
+  margin: 26px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.game-card {
+  padding: 22px;
+}
+
+.board-frame {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.14)),
+    var(--panel-strong);
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background: rgba(8, 20, 27, 0.68);
+  padding: 24px;
+  transition: opacity 180ms ease;
+}
+
+.overlay:not(.visible) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay h2 {
+  margin: 8px 0 12px;
+  font-size: clamp(2rem, 6vw, 3.6rem);
+}
+
+.overlay p {
+  margin: 0;
+}
+
+#overlay-kicker {
+  color: var(--accent-2);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+.mobile-pad {
+  display: none;
+  margin-top: 18px;
+  gap: 10px;
+}
+
+.mobile-pad button {
+  min-width: 72px;
+  min-height: 56px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
+
+.pad-middle {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.pad-middle button:nth-child(1) {
+  grid-column: 1;
+}
+
+.pad-middle button:nth-child(2) {
+  grid-column: 2;
+}
+
+.pad-middle button:nth-child(3) {
+  grid-column: 3;
+}
+
+@media (max-width: 900px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+    padding-top: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero,
+  .game-card {
+    border-radius: 22px;
+  }
+
+  .hero {
+    padding: 24px;
+  }
+
+  .status-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  .mobile-pad {
+    display: grid;
+  }
+}
